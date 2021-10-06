@@ -30,28 +30,12 @@ with open(csvpath) as csvfile:
     #set total pnl to 0
     total_pnl = 0
 
-    #set the months
-    month = ["January", "February", "March", "April" , "May", "June", "July", "August", "September", "October", "November", "December"]
-
     #print the rest of the rows
-    for rows in csvreader:
-        print(rows)
-
-    #count the number of rows in the csv file (excluding the header since we are in the forloop that skipped the header) Position 1 is in the index position of each row
-        num_rows +=1
-
-    #sum the total pnl for each row, index position 1
-        total_pnl += int(rows[1])
-
-### Code works up to this point ###  
-
-    #conditional --> if previous month <> next month, then do some math
-        for i in month:
-            if str(i) != str(i-1):
-                print("Not equal")
-
-
-
+    for month in csvreader:
+        print(month[0])
+        dates = month[0]
+print("break")
+print(dates)
     #Month i+1 Value - Month i Value = month over month change
         #mom_change = int(rows[1]+1) - int(rows[1])
 
