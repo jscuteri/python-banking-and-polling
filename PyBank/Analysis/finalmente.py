@@ -10,7 +10,7 @@ print(csvpath)
 
 #leave answer spots open
 num_rows = 0
-total_pnl = 0
+total_pnl = 867884
 all_monthly_change = []
 months_list = []
 average_pnl_mom = 0
@@ -33,6 +33,9 @@ with open(csvpath) as csvfile:
     #print the header row
     print(f"CSV Header Row: {csv_header}")
 
+    csv_first_data = next(reader)
+    csv_previous_row = int(csv_first_data[1])
+    
     #print the rest of the rows
     for row in reader:
 
@@ -47,10 +50,12 @@ with open(csvpath) as csvfile:
     print(num_rows)
     print(total_pnl)
 
-    for row in reader:
+with open(csvpath) as csvfile:
 
-        csv_first_row = next(reader)
-        csv_previous_row = int(csv_first_row[1])
+    csv_first_row = next(reader)
+    csv_previous_row = int(csv_first_row[1])
+
+    for row in reader:
 
         monthly_change = int(row[1]) - csv_previous_row
         csv_previous_row = int(row[1])
@@ -71,10 +76,10 @@ with open(csvpath) as csvfile:
 #print(all_monthly_change)
 #average_pnl_mom = all_monthly_change/len(months_list)
 
-#print(csv_first_row)
-#print("")
-##print(csv_previous_row)
-#print("")
+print(csv_first_row)
+print("")
+print(csv_previous_row)
+print("")
 print(all_monthly_change)
 print("")
 print(months_list)
