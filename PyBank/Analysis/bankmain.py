@@ -9,66 +9,64 @@ csvpath = os.path.join('..', 'Resources', 'budget_data.csv')
 print(csvpath)
 
 #leave answer spots open
-total_months = []
-net_total_pnl = []
+total_months = 1
+net_total_pnl = 867884
+all_monthly_change = []
+months_list = []
 average_pnl_mom = []
-greatest_increase = []
-greatest_decrease = []
-
-#what do you need to calculate these things? Add to this list as you run through your program. 
-
-month = ["January", "February", "March", "April" , "May", "June", "July", "August", "September", "October", "November", "December"]
-
-#setting your calculations to 0
-num_rows = 0
-total_pnl = 0
+greatest_increase = ["",0]
+greatest_decrease = ["",1000000000]
 
 #open the csv and rename it as csvfile
 with open(csvpath) as csvfile:
     
     #open the csv by breaking up the delimiter
-    csvreader = csv.reader(csvfile, delimiter=',')
+    reader = csv.reader(csvfile)
 
     #print the csv file name. This will basically be gibberish but that's ok. At least we found the file. 
-    print(csvreader)
+    print(reader)
 
     #start breaking out the data in the file
     #read the header row
-    csv_header = next(csvreader)
+    csv_header = next(reader)
 
     #print the header row
     print(f"CSV Header Row: {csv_header}")
 
+    csv_first_row = next(reader)
+    csv_first_row_value = int(csv_first_row[1])
+
     #print the rest of the rows
-    for rows in csvreader:
-        print(rows)
+    for row in reader:
 
     #count the number of rows in the csv file (excluding the header since we are in the forloop that skipped the header) Position 1 is in the index position of each row
-        num_rows +=1
-        total_months = num_rows
+        total_months +=1
        
 
     #sum the total pnl for each row, index position 1
-        total_pnl += int(rows[1])
-        net_total_pnl = total_pnl
+        net_total_pnl += int(row[1])
         
-
 ### Code works up to this point ###  
 
-    #conditional --> if previous month <> next month, then do some math
-    #    for i in month:
-    #        if str(i) != str(i-1):
-     #           print("Not equal")
+        monthly_change = int(row[1]) - csv_first_row_value
+        csv_first_row_value = int(row[1])
 
+        all_monthly_change += [monthly_change] 
 
-#output section
+        months_list += [row[0]]
+
+        if monthly_change > greatest_increase[1]:
+            greatest_increase[0] = row[0]
+            greatest_increase[1] = monthly_change
+
+        if monthly_change < greatest_decrease[1]:
+            greatest_decrease[0] = row[0]
+            greatest_decrease[1] = monthly_change
+
+print(months_list)
+print(all_monthly_change)
+
 print(total_months)
 print(net_total_pnl)
-
-#Month i+1 Value - Month i Value = month over month change
-#mom_change = int(rows[1]+1) - int(rows[1])
-
-## Put each the month over month change using the append
-## average out your list
-
-#min/max for last two parts of the question
+print(greatest_increase)
+print(greatest_decrease)
