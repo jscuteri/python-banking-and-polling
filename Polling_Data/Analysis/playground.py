@@ -121,7 +121,6 @@ with open(output_path, 'w') as txt_file:
         f"-------------------------"'\n'
         )
 
-
 #Election Results to Terminal
 
 print("Election Results")
