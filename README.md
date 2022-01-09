@@ -1,7 +1,5 @@
 # Python – Banking and Polling
 
-# Background
-
 # Banking Analysis
 
 •	Given a set of financial data, I have created a Python script for analyzing the financial records of “ABC Financial Company”
